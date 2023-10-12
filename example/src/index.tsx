@@ -3,27 +3,38 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import {I18NextProvider } from "smartpayi18next"
+import {SmartPayI18NextWrapper} from 'smartpayi18next';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
+
 root.render(
   <React.StrictMode>
-      <I18NextProvider options={{ resources:{
-              "en":{
-                  "common":{
-                      "welcome":"Hello English"
-                  }
-              },
-              "fr":{
-                  "common":{
-                      "welcome":"Bonjour French"
-                  }
-              },
-          },}}>
-    <App />
-      </I18NextProvider>
+    <SmartPayI18NextWrapper
+      options={{
+        // resources:{
+        //     "en":{
+        //         "common":{
+        //             "welcome":"Hello English"
+        //         }
+        //     },
+        //     "fr":{
+        //         "common":{
+        //             "welcome":"Bonjour French"
+        //         }
+        //     },
+        // },
+        backend: {
+          loadPath: '/locales/{{lng}}/{{ns}}.json',
+        },
+        fallbackLng: ['en'],
+        defaultNS: 'common',
+        ns: ['common'],
+      }}
+    >
+      <App />
+    </SmartPayI18NextWrapper>
   </React.StrictMode>
 );
 
