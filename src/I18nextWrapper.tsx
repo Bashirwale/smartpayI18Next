@@ -7,7 +7,7 @@ import LanguageDetector from 'i18next-browser-languagedetector';
 
 const options: InitOptions = {
   interpolation: {
-    escapeValue: false, // react already safes from xss
+    escapeValue: false,
   },
 } as InitOptions;
 
@@ -28,7 +28,10 @@ const createI18nInstance = (config: Partial<InitOptions>) => {
 };
 
 export default function I18nextWrapper(
-  props: PropsWithChildren<{options: Partial<InitOptions>}>
+  props: PropsWithChildren<{
+    options: Partial<InitOptions>;
+    children: React.ReactNode | React.JSX.Element;
+  }>
 ) {
   const {children, options} = props;
   const i18n = useMemo(() => createI18nInstance(options), [options]);
